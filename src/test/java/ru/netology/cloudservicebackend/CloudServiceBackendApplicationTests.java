@@ -1,4 +1,4 @@
-package ru.netology.cloudservisebackend;
+package ru.netology.cloudservicebackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

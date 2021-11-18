@@ -10,10 +10,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ru.netology</groupId>
-    <artifactId>cloud-servise-backend</artifactId>
+    <artifactId>cloud-service-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>cloud-servise-backend</name>
-    <description>cloud-servise-backend</description>
+    <name>cloud-service-backend</name>
+    <description>cloud-service-backend</description>
     <properties>
         <java.version>11</java.version>
     </properties>

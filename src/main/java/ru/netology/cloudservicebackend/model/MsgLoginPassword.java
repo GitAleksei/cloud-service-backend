@@ -1,4 +1,4 @@
-package ru.netology.cloudservisebackend.model;
+package ru.netology.cloudservicebackend.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

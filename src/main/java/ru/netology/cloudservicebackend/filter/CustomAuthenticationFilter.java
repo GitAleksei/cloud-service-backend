@@ -1,4 +1,4 @@
-package ru.netology.cloudservisebackend.filter;
+package ru.netology.cloudservicebackend.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -9,7 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import ru.netology.cloudservisebackend.model.MsgLoginPassword;
+import ru.netology.cloudservicebackend.model.MsgLoginPassword;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

@@ -1,7 +1,7 @@
-package ru.netology.cloudservisebackend.repository;
+package ru.netology.cloudservicebackend.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.netology.cloudservisebackend.entity.Authority;
+import ru.netology.cloudservicebackend.entity.Authority;
 
 public interface AuthorityRepository extends JpaRepository<Authority, Long> {
     Authority findByName(String name);

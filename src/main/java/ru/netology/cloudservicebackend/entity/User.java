@@ -1,12 +1,11 @@
-package ru.netology.cloudservisebackend.entity;
+package ru.netology.cloudservicebackend.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -16,27 +15,26 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Setter
 @ToString
 @NoArgsConstructor @AllArgsConstructor
-public class Authority implements GrantedAuthority {
+public class User {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    private String name;
+    private String fullName;
+    private String username;
+    private String password;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Authority> authorities = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
             return false;
-        Authority role = (Authority) o;
-        return id != null && Objects.equals(id, role.id);
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
     }
 
     @Override
     public int hashCode() {
         return getClass().hashCode();
-    }
-
-    @Override
-    public String getAuthority() {
-        return name;
     }
 }

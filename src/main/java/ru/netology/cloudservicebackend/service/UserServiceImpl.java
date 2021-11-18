@@ -1,4 +1,4 @@
-package ru.netology.cloudservisebackend.service;
+package ru.netology.cloudservicebackend.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,10 +7,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.netology.cloudservisebackend.entity.Authority;
-import ru.netology.cloudservisebackend.entity.User;
-import ru.netology.cloudservisebackend.repository.AuthorityRepository;
-import ru.netology.cloudservisebackend.repository.UserRepository;
+import ru.netology.cloudservicebackend.entity.Authority;
+import ru.netology.cloudservicebackend.entity.User;
+import ru.netology.cloudservicebackend.repository.AuthorityRepository;
+import ru.netology.cloudservicebackend.repository.UserRepository;
 
 import javax.transaction.Transactional;
 

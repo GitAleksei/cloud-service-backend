@@ -1,4 +1,4 @@
-package ru.netology.cloudservisebackend;
+package ru.netology.cloudservicebackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

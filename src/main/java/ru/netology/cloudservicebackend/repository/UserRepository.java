@@ -1,7 +1,7 @@
-package ru.netology.cloudservisebackend.repository;
+package ru.netology.cloudservicebackend.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.netology.cloudservisebackend.entity.User;
+import ru.netology.cloudservicebackend.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
