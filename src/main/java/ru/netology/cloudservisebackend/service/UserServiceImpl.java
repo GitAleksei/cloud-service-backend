@@ -2,6 +2,7 @@ package ru.netology.cloudservisebackend.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.netology.cloudservisebackend.entity.Role;
 import ru.netology.cloudservisebackend.entity.User;
@@ -17,10 +18,12 @@ import javax.transaction.Transactional;
 public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User saveUser(User user) {
         log.info("Saving new user {} to the database", user.getFullName());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

@@ -4,17 +4,20 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @NoArgsConstructor @AllArgsConstructor
 public class Role {
-    @Id
+    @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String name;
 

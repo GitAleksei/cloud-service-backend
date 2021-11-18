@@ -3,22 +3,20 @@ package ru.netology.cloudservisebackend.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @NoArgsConstructor @AllArgsConstructor
 public class User {
-    @Id
+    @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String fullName;
     private String username;
