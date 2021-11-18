@@ -20,7 +20,7 @@ import java.util.Objects;
 public class User {
     @Id
     private Long id;
-    private String name;
+    private String fullName;
     private String username;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
