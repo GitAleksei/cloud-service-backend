@@ -1,19 +1,19 @@
 databaseChangeLog:
   - include:
-      file: migrations/01-create_table_role.xml
+      file: migrations/01-create_table_authority.xml
       relativeToChangelogFile: true
   - include:
       file: migrations/02-create_table_user.xml
       relativeToChangelogFile: true
   - include:
-      file: migrations/03-create_table_user_roles.xml
+      file: migrations/03-create_table_user_authorities.xml
       relativeToChangelogFile: true
   - include:
       file: migrations/04-insert_to_user.xml
       relativeToChangelogFile: true
   - include:
-      file: migrations/05-insert_to_role.xml
+      file: migrations/05-insert_to_authority.xml
       relativeToChangelogFile: true
   - include:
-      file: migrations/06-insert_to_user_roles.xml
+      file: migrations/06-insert_to_user_authorities.xml
       relativeToChangelogFile: true

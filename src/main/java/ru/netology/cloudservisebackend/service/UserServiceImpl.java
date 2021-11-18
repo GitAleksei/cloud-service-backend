@@ -7,9 +7,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.netology.cloudservisebackend.entity.Role;
+import ru.netology.cloudservisebackend.entity.Authority;
 import ru.netology.cloudservisebackend.entity.User;
-import ru.netology.cloudservisebackend.repository.RoleRepository;
+import ru.netology.cloudservisebackend.repository.AuthorityRepository;
 import ru.netology.cloudservisebackend.repository.UserRepository;
 
 import javax.transaction.Transactional;
@@ -19,7 +19,7 @@ import javax.transaction.Transactional;
 @Transactional
 @Slf4j
 public class UserServiceImpl implements UserService, UserDetailsService {
-    private final RoleRepository roleRepository;
+    private final AuthorityRepository authorityRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             log.info("User found in the db: {}", username);
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(),
-                user.getPassword(), null);
+                user.getPassword(), user.getAuthorities());
     }
 
     @Override
@@ -44,17 +44,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Role saveRole(Role role) {
-        log.info("Saving new role {} to the database", role.getName());
-        return roleRepository.save(role);
+    public Authority saveAuthority(Authority authority) {
+        log.info("Saving new authority {} to the database", authority.getName());
+        return authorityRepository.save(authority);
     }
 
     @Override
-    public void addRoleToUser(String username, String roleName) {
-        log.info("Adding role {} to user {}", roleName, username);
+    public void addAuthorityToUser(String username, String authorityName) {
+        log.info("Adding authority {} to user {}", authorityName, username);
         User user = userRepository.findByUsername(username);
-        Role role = roleRepository.findByName(roleName);
-        user.getRoles().add(role);
+        Authority authority = authorityRepository.findByName(authorityName);
+        user.getAuthorities().add(authority);
     }
 
     @Override

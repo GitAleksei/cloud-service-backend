@@ -4,13 +4,13 @@
 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
 
     <changeSet id="05" author="Kiva">
-        <insert tableName="role">
+        <insert tableName="authority">
             <column name="name" value="ROLE_USER"/>
         </insert>
-        <insert tableName="role">
+        <insert tableName="authority">
             <column name="name" value="ROLE_MANAGER"/>
         </insert>
-        <insert tableName="role">
+        <insert tableName="authority">
             <column name="name" value="ROLE_ADMIN"/>
         </insert>
     </changeSet>
