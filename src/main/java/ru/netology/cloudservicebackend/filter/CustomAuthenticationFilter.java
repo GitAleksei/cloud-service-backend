@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @Slf4j
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
@@ -72,6 +74,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, String> jsonMap = new HashMap<>();
         jsonMap.put(jwtTokenData.getHeader(), access_token);
+        response.setContentType(APPLICATION_JSON_VALUE);
         objectMapper.writeValue(response.getWriter(), jsonMap);
         log.info("Sending access_token: {}", access_token);
     }
