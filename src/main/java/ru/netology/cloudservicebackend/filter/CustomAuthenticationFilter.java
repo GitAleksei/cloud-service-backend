@@ -12,7 +12,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import ru.netology.cloudservicebackend.config.JwtTokenData;
 import ru.netology.cloudservicebackend.model.MsgLoginPassword;
 
 import javax.servlet.FilterChain;
@@ -29,13 +28,15 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Slf4j
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
-    private final JwtTokenData jwtTokenData;
+    private final String secret;
+    private final String header;
 
-    public CustomAuthenticationFilter(AuthenticationManager authenticationManager, JwtTokenData jwtTokenData) {
+    public CustomAuthenticationFilter(AuthenticationManager authenticationManager, String secret,
+                                      String header) {
         this.authenticationManager = authenticationManager;
-        this.jwtTokenData = jwtTokenData;
+        this.secret = secret;
+        this.header = header;
     }
-
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
@@ -62,7 +63,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                                             FilterChain chain, Authentication authResult)
             throws IOException, ServletException {
         User user = (User)authResult.getPrincipal();
-        Algorithm algorithm = Algorithm.HMAC256(jwtTokenData.getSecret());
+        Algorithm algorithm = Algorithm.HMAC256(secret);
         String access_token = JWT.create()
                 .withSubject(user.getUsername())
                 .withIssuer(request.getRequestURL().toString())
@@ -73,7 +74,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .sign(algorithm);
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, String> jsonMap = new HashMap<>();
-        jsonMap.put(jwtTokenData.getHeader(), access_token);
+        jsonMap.put(header, access_token);
         response.setContentType(APPLICATION_JSON_VALUE);
         objectMapper.writeValue(response.getWriter(), jsonMap);
         log.info("Sending access_token: {}", access_token);

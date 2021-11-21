@@ -1,6 +1,7 @@
 package ru.netology.cloudservicebackend.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +19,10 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Value("${jwt.token.secret}")
+    private String secret;
+    @Value("${jwt.token.header}")
+    private String header;
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
@@ -34,12 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/login/**").permitAll()
                 .anyRequest().authenticated();
-        http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean(), jwtTokenData()));
-    }
-
-    @Bean
-    public JwtTokenData jwtTokenData() {
-        return new JwtTokenData();
+        http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean(), secret, header));
     }
 
     @Bean
