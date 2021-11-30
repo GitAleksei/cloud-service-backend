@@ -2,6 +2,7 @@ package ru.netology.cloudservicebackend.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {
-            log.error("User not found in the database");
+            log.error("User {} not found in the database", username);
             throw new UsernameNotFoundException("User not found in the database");
         } else {
             log.info("User found in the db: {}", username);

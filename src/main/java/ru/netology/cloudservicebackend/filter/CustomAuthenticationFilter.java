@@ -55,6 +55,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         log.info("Username is: {}", username);
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(username, password);
+        log.info(authenticationToken.toString());
         return authenticationManager.authenticate(authenticationToken);
     }
 
@@ -78,5 +79,13 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         response.setContentType(APPLICATION_JSON_VALUE);
         objectMapper.writeValue(response.getWriter(), jsonMap);
         log.info("Sending access_token: {}", access_token);
+    }
+
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request,
+                                              HttpServletResponse response,
+                                              AuthenticationException failed)
+            throws IOException, ServletException {
+        super.unsuccessfulAuthentication(request, response, failed);
     }
 }

@@ -10,12 +10,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class CorsConfig implements WebMvcConfigurer {
     @Value("${cors.domain}")
-    private String domain;
+    private String frontDomain;
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins(domain)
+                .allowedOrigins(frontDomain)
                 .allowCredentials(true);
     }
 }

@@ -1,7 +1,6 @@
 package ru.netology.cloudservicebackend.config;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.netology.cloudservicebackend.filter.CustomAuthenticationFilter;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -19,10 +17,6 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Value("${jwt.token.secret}")
-    private String secret;
-    @Value("${jwt.token.header}")
-    private String header;
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
@@ -33,13 +27,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors();
-        http.csrf().disable()
-                .sessionManagement().sessionCreationPolicy(STATELESS);
-        http.authorizeRequests()
-                .antMatchers("/login/**").permitAll()
+        http.cors()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(new RestAuthenticationEntryPoint())
+                .and()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(STATELESS)
+                .and()
+                .authorizeRequests()
+                .antMatchers("/login").permitAll()
                 .anyRequest().authenticated();
-        http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean(), secret, header));
     }
 
     @Bean

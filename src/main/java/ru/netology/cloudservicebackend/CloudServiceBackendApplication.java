@@ -12,9 +12,4 @@ public class CloudServiceBackendApplication {
     public static void main(String[] args) {
         SpringApplication.run(CloudServiceBackendApplication.class, args);
     }
-
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }
