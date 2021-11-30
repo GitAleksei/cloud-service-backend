@@ -1,7 +1,9 @@
 package ru.netology.cloudservicebackend.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
+@Slf4j
 public class SecurityController {
     private final SecurityService securityService;
 
@@ -32,8 +35,10 @@ public class SecurityController {
         return securityService.successfulAuthentication(authentication);
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public void getLogout(HttpServletRequest request, HttpServletResponse response) {
+        log.info("User {} is logout",
+                SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         SecurityContextLogoutHandler securityContextLogoutHandler =
                 new SecurityContextLogoutHandler();
         securityContextLogoutHandler.logout(request, response, null);

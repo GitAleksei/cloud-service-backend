@@ -10,6 +10,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ru.netology.cloudservicebackend.filter.CustomAuthorizationFilter;
+
+import javax.servlet.http.HttpServletResponse;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -19,6 +23,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
+    private final CustomAuthorizationFilter customAuthorizationFilter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -36,7 +41,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and()
+                .logout(logout -> logout
+                        .permitAll()
+                        .logoutSuccessHandler((request, response, authentication) ->
+                                    response.setStatus(HttpServletResponse.SC_OK)))
+                .addFilterBefore(customAuthorizationFilter,
+                        UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
