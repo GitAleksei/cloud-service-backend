@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import ru.netology.cloudservicebackend.filter.CustomAuthenticationFilter;
+import ru.netology.cloudservicebackend.security.CustomLogoutSuccessHandler;
+import ru.netology.cloudservicebackend.security.SavedTokens;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
     private final CustomAuthenticationFilter customAuthorizationFilter;
+    private final CustomLogoutSuccessHandler customLogoutSuccessHandler;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -43,10 +46,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .logout(logout -> logout
-                        .permitAll()
-                        .logoutSuccessHandler((request, response, authentication) ->
-                                    response.setStatus(HttpServletResponse.SC_OK)))
+                .logout()
+                .logoutSuccessHandler(customLogoutSuccessHandler)
+                .and()
                 .addFilterBefore(customAuthorizationFilter,
                         UsernamePasswordAuthenticationFilter.class);
     }

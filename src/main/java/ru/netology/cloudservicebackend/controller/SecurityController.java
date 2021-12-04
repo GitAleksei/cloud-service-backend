@@ -34,14 +34,4 @@ public class SecurityController {
         }
         return securityService.successfulAuthentication(authentication);
     }
-
-    @PostMapping("/logout")
-    public void getLogout(HttpServletRequest request, HttpServletResponse response) {
-        log.info("User {} is logout",
-                SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        SecurityContextLogoutHandler securityContextLogoutHandler =
-                new SecurityContextLogoutHandler();
-        securityContextLogoutHandler.logout(request, response, null);
-    }
-
 }
