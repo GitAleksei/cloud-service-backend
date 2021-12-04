@@ -21,6 +21,10 @@ public class Authority implements GrantedAuthority {
     private Long id;
     private String name;
 
+    public Authority(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

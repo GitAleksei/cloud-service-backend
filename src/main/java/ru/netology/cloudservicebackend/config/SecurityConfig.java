@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import ru.netology.cloudservicebackend.filter.CustomAuthorizationFilter;
+import ru.netology.cloudservicebackend.filter.CustomAuthenticationFilter;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,7 +23,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
-    private final CustomAuthorizationFilter customAuthorizationFilter;
+    private final CustomAuthenticationFilter customAuthorizationFilter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors()
                 .and()
-                .exceptionHandling().authenticationEntryPoint(new RestAuthenticationEntryPoint())
+                .exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint())
                 .and()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(STATELESS)

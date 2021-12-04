@@ -1,13 +1,22 @@
 package ru.netology.cloudservicebackend.model;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class MsgAnswerException {
-    public String message;
-    public int id;
+    private String message;
+    private int id;
+    private static int idStatic;
+
+    public MsgAnswerException() {
+        idStatic++;
+        id = idStatic;
+    }
+
+    public MsgAnswerException(String message) {
+        this.message = message;
+        idStatic++;
+        id = idStatic;
+    }
 }

@@ -13,7 +13,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import ru.netology.cloudservicebackend.model.MsgAnswerToken;
 import ru.netology.cloudservicebackend.model.MsgLoginPassword;
+import ru.netology.cloudservicebackend.security.SavedTokens;
 
+import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,10 +25,13 @@ public class SecurityService {
     @Value("${jwt.token.secret}")
     private String secret;
 
+    private final SavedTokens savedTokens;
     private final AuthenticationManager authenticationManager;
 
-    public SecurityService(AuthenticationManager authenticationManager) {
+    public SecurityService(AuthenticationManager authenticationManager,
+                           SavedTokens savedTokens) {
         this.authenticationManager = authenticationManager;
+        this.savedTokens = savedTokens;
     }
 
     public Authentication attemptAuthentication(MsgLoginPassword msgLoginPassword)
@@ -49,6 +55,7 @@ public class SecurityService {
                                 .map(GrantedAuthority::getAuthority)
                                 .collect(Collectors.toList()))
                 .sign(algorithm);
+        savedTokens.add(access_token);
         MsgAnswerToken msgAnswerToken = new MsgAnswerToken(access_token);
         log.info("Sending access_token: {}", access_token);
         return msgAnswerToken;
