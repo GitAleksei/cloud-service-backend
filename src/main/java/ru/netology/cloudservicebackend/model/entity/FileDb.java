@@ -15,7 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class FileDB {
+public class FileDb {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String filename;
