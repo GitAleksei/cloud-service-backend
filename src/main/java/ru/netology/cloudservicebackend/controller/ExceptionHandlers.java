@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.netology.cloudservicebackend.model.MsgAnswerException;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 @RestControllerAdvice
 public class ExceptionHandlers {
@@ -14,6 +15,12 @@ public class ExceptionHandlers {
     @ExceptionHandler(FileNotFoundException.class)
     public ResponseEntity<MsgAnswerException> handlerAE(FileNotFoundException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new MsgAnswerException(e.getMessage()));
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<MsgAnswerException> handlerAE(IOException e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new MsgAnswerException(e.getMessage()));
     }
 }

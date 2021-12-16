@@ -7,7 +7,7 @@ import ru.netology.cloudservicebackend.model.entity.FileDb;
 import java.util.Optional;
 
 @Repository
-public interface FileDbRepository extends JpaRepository<FileDb, String> {
+public interface FileDbRepository extends JpaRepository<FileDb, Long> {
 
     Optional<FileDb> findByFilename(String filename);
 }

@@ -17,3 +17,6 @@ databaseChangeLog:
   - include:
       file: migrations/06-insert_to_user_authorities.xml
       relativeToChangelogFile: true
+  - include:
+      file: migrations/07-create_table_file_db.xml
+      relativeToChangelogFile: true

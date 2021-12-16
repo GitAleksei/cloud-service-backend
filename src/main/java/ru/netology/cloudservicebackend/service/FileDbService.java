@@ -24,6 +24,7 @@ public class FileDbService {
         fileDb.setFilename(file.getOriginalFilename());
         fileDb.setType(file.getContentType());
         fileDb.setData(file.getBytes());
+        fileDb.setId(12L);
         return fileDbRepository.save(fileDb);
     }
 

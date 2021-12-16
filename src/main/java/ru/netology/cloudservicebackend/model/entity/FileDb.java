@@ -2,10 +2,7 @@ package ru.netology.cloudservicebackend.model.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -24,6 +21,7 @@ public class FileDb {
     private String filename;
     private String type;
     @Lob
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] data;
 
     @Override
