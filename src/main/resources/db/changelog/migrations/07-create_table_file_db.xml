@@ -12,6 +12,7 @@
             </column>
             <column name="filename" type="VARCHAR(255)"/>
             <column name="type" type="VARCHAR(255)"/>
+            <column name="size" type="BIGINT"/>
             <column name="data" type="LONGBLOB"/>
         </createTable>
     </changeSet>

@@ -20,6 +20,7 @@ public class FileDb {
     private Long id;
     private String filename;
     private String type;
+    private Long size;
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private byte[] data;
@@ -29,12 +30,12 @@ public class FileDb {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FileDb fileDb = (FileDb) o;
-        return Objects.equals(id, fileDb.id) && Objects.equals(filename, fileDb.filename) && Objects.equals(type, fileDb.type) && Arrays.equals(data, fileDb.data);
+        return Objects.equals(id, fileDb.id) && Objects.equals(filename, fileDb.filename) && Objects.equals(type, fileDb.type) && Objects.equals(size, fileDb.size) && Arrays.equals(data, fileDb.data);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, filename, type);
+        int result = Objects.hash(id, filename, type, size);
         result = 31 * result + Arrays.hashCode(data);
         return result;
     }

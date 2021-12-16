@@ -1,7 +1,10 @@
 package ru.netology.cloudservicebackend.service;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import ru.netology.cloudservicebackend.model.MsgAnswerFileList;
 import ru.netology.cloudservicebackend.model.entity.FileDb;
 import ru.netology.cloudservicebackend.repository.FileDbRepository;
 
@@ -9,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class FileDbService {
@@ -24,7 +28,7 @@ public class FileDbService {
         fileDb.setFilename(file.getOriginalFilename());
         fileDb.setType(file.getContentType());
         fileDb.setData(file.getBytes());
-        fileDb.setId(12L);
+        fileDb.setSize(file.getSize());
         return fileDbRepository.save(fileDb);
     }
 
@@ -33,7 +37,11 @@ public class FileDbService {
                 .orElseThrow(() -> new FileNotFoundException("File not found: " + filename));
     }
 
-    public List<FileDb> getFileList() {
-        return fileDbRepository.findAll();
+    public List<MsgAnswerFileList> getFileList(int limit) {
+        var pageRequest = PageRequest.of(0, limit, Sort.by("id").descending());
+
+        return fileDbRepository.findAll(pageRequest).stream()
+                .map(file -> new MsgAnswerFileList(file.getFilename(), file.getSize()))
+                .collect(Collectors.toList());
     }
 }
