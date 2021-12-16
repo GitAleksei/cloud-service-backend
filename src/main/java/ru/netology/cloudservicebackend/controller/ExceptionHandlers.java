@@ -12,9 +12,9 @@ import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 @RestControllerAdvice
 public class ExceptionHandlers {
 
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<MsgAnswerException> handlerAE(AuthenticationException e) {
-        return ResponseEntity.status(UNAUTHORIZED)
-                .body(new MsgAnswerException(e.getMessage()));
-    }
+//    @ExceptionHandler(AuthenticationException.class)
+//    public ResponseEntity<MsgAnswerException> handlerAE(AuthenticationException e) {
+//        return ResponseEntity.status(UNAUTHORIZED)
+//                .body(new MsgAnswerException(e.getMessage()));
+//    }
 }
