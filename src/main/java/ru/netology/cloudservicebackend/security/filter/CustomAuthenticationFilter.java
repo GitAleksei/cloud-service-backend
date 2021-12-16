@@ -1,4 +1,4 @@
-package ru.netology.cloudservicebackend.filter;
+package ru.netology.cloudservicebackend.security.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -11,8 +11,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import ru.netology.cloudservicebackend.entity.Authority;
-import ru.netology.cloudservicebackend.exception.NotFoundTokenException;
+import ru.netology.cloudservicebackend.security.entity.Authority;
+import ru.netology.cloudservicebackend.security.exception.NotFoundTokenException;
 import ru.netology.cloudservicebackend.model.MsgAnswerException;
 import ru.netology.cloudservicebackend.security.SavedTokens;
 

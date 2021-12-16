@@ -1,4 +1,4 @@
-package ru.netology.cloudservicebackend.config;
+package ru.netology.cloudservicebackend.security.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

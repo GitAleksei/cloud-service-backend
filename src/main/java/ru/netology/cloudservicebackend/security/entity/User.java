@@ -1,4 +1,4 @@
-package ru.netology.cloudservicebackend.entity;
+package ru.netology.cloudservicebackend.security.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;

@@ -17,10 +17,4 @@ public class ExceptionHandlers {
         return ResponseEntity.status(UNAUTHORIZED)
                 .body(new MsgAnswerException(e.getMessage()));
     }
-
-//    @ExceptionHandler(ResponseStatusException.class)
-//    public ResponseEntity<MsgAnswerException> handlerRSE(ResponseStatusException e) {
-//        return ResponseEntity.status(e.getStatus())
-//                .body(new MsgAnswerException(e.getMessage(), exceptionId.incrementAndGet()));
-//    }
 }
