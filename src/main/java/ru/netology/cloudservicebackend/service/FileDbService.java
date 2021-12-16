@@ -37,6 +37,11 @@ public class FileDbService {
                 .orElseThrow(() -> new FileNotFoundException("File not found: " + filename));
     }
 
+    public void deleteFileByFilename(String filename) throws FileNotFoundException {
+        fileDbRepository.deleteByFilename(filename)
+                .orElseThrow(() -> new FileNotFoundException("File not found: " + filename));
+    }
+
     public List<MsgAnswerFileList> getFileList(int limit) {
         var pageRequest = PageRequest.of(0, limit, Sort.by("id").descending());
 

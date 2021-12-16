@@ -7,6 +7,7 @@ import ru.netology.cloudservicebackend.model.MsgAnswerFileList;
 import ru.netology.cloudservicebackend.service.FileDbService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +27,12 @@ public class FileDbController {
         log.info(file.getOriginalFilename() + " - " + file.getContentType());
         log.info(file.getSize() + "");
         fileDbService.save(file);
+    }
+
+    @DeleteMapping("/file")
+    public void deleteFile(@RequestParam("filename") String filename) throws FileNotFoundException {
+        log.info("Delete file: " + filename);
+        fileDbService.deleteFileByFilename(filename);
     }
 
     @GetMapping("/list")
