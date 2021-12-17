@@ -7,6 +7,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,9 +19,11 @@ import ru.netology.cloudservicebackend.security.service.SecurityService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 @RestController
 @Slf4j
+@Validated
 public class SecurityController {
     private final SecurityService securityService;
 
@@ -29,7 +32,7 @@ public class SecurityController {
     }
 
     @PostMapping("/login")
-    public MsgAnswerToken postLogin(@RequestBody MsgLoginPassword msgLoginPassword) {
+    public MsgAnswerToken postLogin(@Valid @RequestBody MsgLoginPassword msgLoginPassword) {
         Authentication authentication = securityService.attemptAuthentication(msgLoginPassword);
         if (!authentication.isAuthenticated()) {
             throw new AuthenticationCredentialsNotFoundException("Not found couple login/password");
