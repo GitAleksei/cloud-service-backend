@@ -10,8 +10,6 @@ import ru.netology.cloudservicebackend.repository.FileDbRepository;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,6 +39,13 @@ public class FileDbService {
     public void deleteFileByFilename(String filename) throws FileNotFoundException {
         fileDbRepository.deleteByFilename(filename)
                 .orElseThrow(() -> new FileNotFoundException("File not found: " + filename));
+    }
+
+    public synchronized void renameFile(String oldName, String newName) throws FileNotFoundException {
+        FileDb fileDb = getFileByFilename(oldName);
+        deleteFileByFilename(oldName);
+        fileDb.setFilename(newName);
+        fileDbRepository.save(fileDb);
     }
 
     public List<MsgAnswerFileList> getFileList(int limit) {

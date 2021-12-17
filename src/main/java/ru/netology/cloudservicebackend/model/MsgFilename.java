@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MsgAnswerFile {
-    private String hash;
-    private byte[] file;
+public class MsgFilename {
+    private String filename;
 }
