@@ -6,22 +6,22 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
     <changeSet id="04" author="Kiva">
         <insert tableName="user">
             <column name="full_name" value="Lev Tolstoy"/>
-            <column name="username" value="lev"/>
+            <column name="email" value="lev@mail.ru"/>
             <column name="password" value="$2a$10$xTUekSMxNNVrmOwzEvCGyO0Jh2VoJ820U6nuk8DayiP5KXZNsLRyK"/>
         </insert>
         <insert tableName="user">
             <column name="full_name" value="Fyodor Dostoevsky"/>
-            <column name="username" value="fyodor"/>
+            <column name="email" value="fyodor@gmail.com"/>
             <column name="password" value="$2a$10$xTUekSMxNNVrmOwzEvCGyO0Jh2VoJ820U6nuk8DayiP5KXZNsLRyK"/>
         </insert>
         <insert tableName="user">
             <column name="full_name" value="Lewis Carroll"/>
-            <column name="username" value="lewis"/>
+            <column name="email" value="lewis@gmail.com"/>
             <column name="password" value="$2a$10$xTUekSMxNNVrmOwzEvCGyO0Jh2VoJ820U6nuk8DayiP5KXZNsLRyK"/>
         </insert>
         <insert tableName="user">
             <column name="full_name" value="Alexander Pushkin"/>
-            <column name="username" value="alex"/>
+            <column name="email" value="alex@mail.ru"/>
             <column name="password" value="$2a$10$xTUekSMxNNVrmOwzEvCGyO0Jh2VoJ820U6nuk8DayiP5KXZNsLRyK"/>
         </insert>
     </changeSet>

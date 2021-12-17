@@ -25,14 +25,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByEmail(username);
         if (user == null) {
             log.error("User {} not found in the database", username);
             throw new UsernameNotFoundException("User not found in the database");
         } else {
             log.info("User found in the db: {}", username);
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),
+        return new org.springframework.security.core.userdetails.User(user.getEmail(),
                 user.getPassword(), user.getAuthorities());
     }
 
@@ -52,13 +52,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void addAuthorityToUser(String username, String authorityName) {
         log.info("Adding authority {} to user {}", authorityName, username);
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByEmail(username);
         Authority authority = authorityRepository.findByName(authorityName);
         user.getAuthorities().add(authority);
     }
 
     @Override
     public User getUser(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByEmail(username);
     }
 }

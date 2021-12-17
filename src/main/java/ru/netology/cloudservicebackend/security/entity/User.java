@@ -19,7 +19,7 @@ public class User {
     @Id @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String fullName;
-    private String username;
+    private String email;
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Authority> authorities = new ArrayList<>();
