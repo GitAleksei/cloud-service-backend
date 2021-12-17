@@ -7,10 +7,9 @@
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
     <changeSet id="07" author="Kiva">
         <createTable tableName="file_db">
-            <column autoIncrement="true" name="id" type="BIGINT">
+            <column name="filename" type="VARCHAR(255)">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_filedb"/>
             </column>
-            <column name="filename" type="VARCHAR(255)"/>
             <column name="type" type="VARCHAR(255)"/>
             <column name="size" type="BIGINT"/>
             <column name="data" type="LONGBLOB"/>

@@ -17,12 +17,12 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1637217831529-4" author="Kiva">
+    <changeSet id="04" author="Kiva">
         <addForeignKeyConstraint baseColumnNames="authorities_id" baseTableName="user_authorities"
                                  constraintName="fk_userol_on_authority" referencedColumnNames="id"
                                  referencedTableName="authority"/>
     </changeSet>
-    <changeSet id="1637217831529-5" author="Kiva">
+    <changeSet id="05" author="Kiva">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_authorities"
                                  constraintName="fk_userol_on_user" referencedColumnNames="id"
                                  referencedTableName="user"/>

@@ -10,8 +10,9 @@ import ru.netology.cloudservicebackend.repository.FileDbRepository;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,7 +44,7 @@ public class FileDbService {
     }
 
     public List<MsgAnswerFileList> getFileList(int limit) {
-        var pageRequest = PageRequest.of(0, limit, Sort.by("id").descending());
+        var pageRequest = PageRequest.of(0, limit, Sort.by("filename"));
 
         return fileDbRepository.findAll(pageRequest).stream()
                 .map(file -> new MsgAnswerFileList(file.getFilename(), file.getSize()))

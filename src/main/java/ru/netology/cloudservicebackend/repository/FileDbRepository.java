@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Repository
-public interface FileDbRepository extends JpaRepository<FileDb, Long> {
+public interface FileDbRepository extends JpaRepository<FileDb, String> {
 
     Optional<FileDb> findByFilename(String filename);
 

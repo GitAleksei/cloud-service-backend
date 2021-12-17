@@ -16,8 +16,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FileDb {
-    @Id @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+    @Id
     private String filename;
     private String type;
     private Long size;
@@ -30,12 +29,12 @@ public class FileDb {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FileDb fileDb = (FileDb) o;
-        return Objects.equals(id, fileDb.id) && Objects.equals(filename, fileDb.filename) && Objects.equals(type, fileDb.type) && Objects.equals(size, fileDb.size) && Arrays.equals(data, fileDb.data);
+        return Objects.equals(filename, fileDb.filename) && Objects.equals(type, fileDb.type) && Objects.equals(size, fileDb.size) && Arrays.equals(data, fileDb.data);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, filename, type, size);
+        int result = Objects.hash(filename, type, size);
         result = 31 * result + Arrays.hashCode(data);
         return result;
     }
