@@ -8,8 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.netology.cloudservicebackend.model.MsgAnswerToken;
 import ru.netology.cloudservicebackend.model.MsgLoginPassword;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class SecurityControllerTest {
     private static final String USERNAME = "lev@mail.ru";
