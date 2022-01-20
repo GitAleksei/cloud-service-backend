@@ -1,59 +1,58 @@
-# Дипломная работа “Облачное хранилище”
+# Thesis “Cloud storage”
+[Russian language](README_RU.md)
+## Project Description
 
-## Описание проекта
+This application is the back-end part of the REST service.
+The service provides a REST interface for uploading files and displaying
+a list of the user's already uploaded files. All requests to the service
+are authorized. A pre-prepared
+[web application (FRONT)](https://github.com/netology-code/jd-homeworks/tree/master/diploma/netology-diplom-frontend)
+to the developed BACK service without modifications, and the FRONT functionality
+is also used to authorize, download and display a list of user files.
 
-Данное приложение является back-end частью REST-сервиса. Сервис предоставляет REST интерфейс для 
-возможности
-загрузки файлов и вывода списка уже загруженных файлов пользователя. Все запросы к сервису
-авторизованы. Заранее подготовленное 
-[веб-приложение (FRONT)](https://github.com/netology-code/jd-homeworks/tree/master/diploma/netology-diplom-frontend) подключается к
-разработанному BACK сервису без доработок, а также используется функционал FRONT для авторизации, 
-загрузки и вывода списка файлов пользователя.
+## Launch
 
-## Запуск
+The application is launched with the `docker-compose up` command.
+But first you need to get the front, mysql and back images. 
 
-Приложение запускается командой `docker-compose up`. Но для начала нужно получить образы 
-front, mysql и back.
+**mysql**: Download the image using the `docker pull mysql` command
 
-**mysql**: Качаем образ с помощью команды `docker pull mysql`
+**back**: Using [Dockerfile](Dockerfile) and the command `docker build -t back .`,
+we create the back image
 
-**back**: С помощью [Dockerfile](Dockerfile) и команды `docker build -t back .`, создаем образ 
-back
-
-**front**: Нужно добавить Dockerfile в корень проекта с приложением FRONT. Далее прописать команду 
-`docker build -t front .`. Ниже содержание Dockerfile:
+**front**: You need to add a Dockerfile to the root of the project with the FRONT application. 
+Next, write the command `docker build -t front .`. Below is the contents of the Dockerfile:
 ```Dockerfile
 FROM node:12
 COPY . .
 EXPOSE 8080
 CMD [ "npm", "run", "serve" ]
 ```
-Приложение работает по адресу [http://localhost:8080](http://localhost:8080).
+The app is running at [http://localhost:8080](http://localhost:8080).
 
-## Работа приложения
+## Application operation
 
-Приложение реализовано с помощью фреймворка Spring. 
+The application is implemented using the Spring framework.
 
-- Сервис выполняет все методы описанные в
-[yaml файле](https://github.com/netology-code/jd-homeworks/blob/master/diploma/CloudServiceSpecification.yaml):
-  1. Вывод списка файлов
-  2. Добавление файла
-  3. Удаление файла
-  4. Авторизация
-- Информация о пользователях сервиса (логины для авторизации) хранится в базе данных MySQL
-- Журналирование ведется в cloud.log
+- The service performs all the methods described in
+  [yaml file](https://github.com/netology-code/jd-homeworks/blob/master/diploma/CloudServiceSpecification.yaml):
+    1. Displaying a list of files
+    2. Adding a file
+    3. Deleting a file
+    4. Authorization
+- Information about users of the service (logins for authorization) is stored in the MySQL database
+- Logging is done in cloud.log
 
-После команды `docker-compose up`, сервис начинает работать по адресу 
-[http://localhost:8080](http://localhost:8080). Вас первым делом перенаправит на страницу с вводом 
-почты и пароля.
+After the `docker-compose up` command, the service starts running at
+[http://localhost:8080](http://localhost:8080). 
+You will first be redirected to a page where you enter your email and password.
 
-Все пользователи и их роли хранятся в БД. Прописываются они при первом запуске с помощью 
-**liquibase**. Пароли зашифрованы BCryptPasswordEncoder. Тестовый пользователь: 
-login = lev@mail.ru, password = 1234. Логин и пароль проверяются на стороне BACK. При успешном 
-прохождении проверки, обратно отправляется сконфигурированный **JsonWebToken** и сохраняется на 
-BACK 
-([требования задания](https://github.com/netology-code/jd-homeworks/blob/master/diploma/cloudservice.md)). 
-Все дальнейшие запросы производятся с этим токеном в Header auth-token. После логаута, токен 
-удаляется.
+All users and their roles are stored in the database. They are registered at the first start with
+the help of **liquibase**. Passwords are encrypted with BCryptPasswordEncoder. Test user:
+login = lev@mail.ru, password = 1234. Login and password are checked on the BACK side.
+Upon successful verification, the configured **JsonWebToken** is sent back and stored on BACK
+([job requirements](https://github.com/netology-code/jd-homeworks/blob/master/diploma/cloudservice.md)).
+All further requests are made with this token in the Header auth-token.
+After logout, the token is deleted
 
-Файлы, как и пользователи, хранятся в БД MySQL. 
+Files, like users, are stored in a MySQL database.
